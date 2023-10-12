@@ -2,4 +2,4 @@
 /.celery
 ./celery
 celery
-
+celery-venv/
