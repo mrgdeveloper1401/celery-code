@@ -2,7 +2,7 @@ from celery import Celery
 from celery.utils.log import get_task_logger
 
 
-app = Celery('binds', broker='amqp://vpn:vpnvpn@localhost:5672/vpn_vhost', backend='rpc://')
+app = Celery('binds', broker='amqp://vpn:vpnvpnt@localhost:5672/vpn_vhost', backend='rpc://')
 logger = get_task_logger(__name__)
 
 
@@ -31,4 +31,4 @@ def dev(self, a, b):
     except ZeroDivisionError:
         logger.warning('ziro division error')
         logger.info('retry task after 10 seconds')
-        self.retry(countdown=10, max_retries=5)
+        self.retry(countdown=180, max_retries=5)
