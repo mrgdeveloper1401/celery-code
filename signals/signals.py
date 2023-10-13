@@ -3,7 +3,7 @@ from celery.signals import after_setup_logger
 
 
 app = Celery('signals', broker='amqp://guest:guest@localhost:5672')
-app.config_from_object('celery_conf')
+# app.config_from_object('celery_conf')
 
 @app.task
 def add(a, b):
@@ -19,3 +19,6 @@ def show(sender=None, **kwargs):
     print('tsk before run ')
     print(sender)
     print(kwargs)
+    
+
+result = mul.apply_async((10,7))
