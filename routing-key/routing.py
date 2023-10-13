@@ -5,12 +5,12 @@ app = Celery('routing', broker='amqp://guest:guest@localhost:5672//', backend='r
 app.config_from_object('celery_conf')
 
 
-@app.task
+@app.task(name='routing.add')
 def add(a, b):
     return a + b
 
 
-@app.task
+@app.task(name='routing.mull')
 def mull(a, b):
     return a * b
 
