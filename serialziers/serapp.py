@@ -3,17 +3,14 @@ from ser import Person
 
 
 app = Celery('serapp', broker='amqp://guest:guest@localhost:5672//', backend='rpc://')
+app.config_from_object('ser_config')
 
-app.conf.update(
-    task_serializer= 'pickle',
-    result_serializer= 'pickle',
-    accept_content = ['application/x-python-serialzie'],
-)
 
-p1 = Person('John', 'Doe', 30)
+
 @app.task(bind=True)
-def call(Person):
+def call(self, Person):
     return Person.show()
 
+p1 = Person('John', 'Doe', 30)
 result = call.delay(p1)
-print(result.get)
+# print(result.get())
